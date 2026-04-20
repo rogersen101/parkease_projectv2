@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %} parking {% endblock %}
+  <body>
+
+
+    
+    {% block content %}
+    <div class="main-content p-4">
+      <div class="container-fluid">
+        <h1 class="mt-4 text-center">Welcome to ParkEase</h1>
+        <p class="text-muted text-center">Manage Parking services and sales below.</p>
+        <div class="row">
+          <!-- dashboard cards -->
+           <div class="card card-index1">
+            <div class="card-body">
+              <h5 class="card-title">Collected Revenue</h5>
+              <p class="card-text">400,000 UG SHS</p>
+              <a href="#" class="btn btn-primary">Click here</a>
+            </div>
+          </div>
+          <div class="card card-index1" >
+            <div class="card-body">
+              <h5 class="card-title">Number of Customers</h5>
+              <p class="card-text">61</p>
+              <a href="#" class="btn btn-primary">Click here</a>
+            </div>
+          </div>
+
+          <div class="card card-index1">
+            <div class="card-body">
+              <h5 class="card-title">Available parking</h5>
+              <p class="card-text">20 slots</p>
+              <a href="#" class="btn btn-primary">Click here</a>
+            </div>
+          </div>
+          <div class="card card-index1" >
+            <div class="card-body">
+              <h5 class="card-title bold">WANT TO PARK</h5>
+              <a href="Vehicle_registration.html" class="btn btn-success R1">Register Customer</a>
+              <a href="signout.html" class="btn btn-warning R2">Vehicle Signout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- below is a table report containing transactions -->
+    <div class="row">
+      <div class="col-sm-3 col-md-6 col-lg-12">
+        <div class="container mt-3">
+          <h2>Report</h2>
+          <p>The table shows transcations</p>
+          <table class="table table table-light">
+            <thead>
+              <tr>
+                <th>Driver Name</th>
+                <th>Number Plate</th>
+                <th>Vehicle Type</th>
+                <th>Parking Time in</th>
+                <th>Parking Time Out</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Peter</td>
+                <td>UBK234H</td>
+                <td>Toyota Probox</td>
+                <td>08:00am</td>
+                <td>06:00pm</td>
+                <td>5000</td>
+              </tr>
+              <tr>
+                <td>Marvin</td>
+                <td>UAT234T</td>
+                <td>Pajero io</td>
+                <td>08:00am</td>
+                <td>06:00pm</td>
+                <td>5000</td>
+              </tr>
+              <tr>
+                <td>Ben</td>
+                <td>UBH511k</td>
+                <td>Toyota Fielder</td>
+                <td>08:10am</td>
+                <td>07:00pm</td>
+                <td>5000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card text-center">
+      <div class="card-footer text-white bg-primary">
+        © 2026 ParkEase. All Rights Reserved
+      </div>
+    </div>
+    {% endblock %}
+ 
