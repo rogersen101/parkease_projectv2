@@ -20,6 +20,8 @@ from parking import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('parking', views.parking, name='parking'),
+    path('dashboard', views.dashboard, name='dashboard'),
     path('', views.register, name='register'),
+    path('list/', views.vehicle_list, name='vehicle_list'),
   ]
+

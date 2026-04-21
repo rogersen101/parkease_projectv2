@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h3 class="mb-4">Parked Vehicles</h3>
+
+    <table class="table table-bordered table-striped shadow">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Driver</th>
+                <th>Plate No</th>
+                <th>Vehicle Type</th>
+                <th>Phone No</th>
+                <th>Arrival</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.driver_name }}</td>
+                <td>{{ vehicle.number_plate }}</td>
+                <td>{{ vehicle.vehicle_type }}</td>
+                <td>{{ vehicle.phone }}</td>
+                <td>{{ vehicle.arrival_time }}</td>
+                <td>
+                    <span class="badge bg-success">
+                        {{ vehicle.status }}
+                    </span>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center text-danger">
+                    No vehicles found
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
