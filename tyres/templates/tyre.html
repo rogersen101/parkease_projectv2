@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+tyre
+{% endblock %}
+
+{%  block content %}
+<h3>Tyre Service</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Save</button>
+</form>
+{% endblock %}
