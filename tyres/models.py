@@ -12,3 +12,9 @@ class TyreService(models.Model):
     service_type = models.CharField(max_length=20, choices=SERVICE_TYPES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Battery(models.Model):
+    vehicle = models.ForeignKey('parking.Vehicle', on_delete=models.CASCADE)
+    type = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)

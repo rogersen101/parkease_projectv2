@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Vehicle_list
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -32,6 +36,17 @@
                     <span class="badge bg-success">
                         {{ vehicle.status }}
                     </span>
+                    <td>
+    <!-- Receipt -->
+    <a href="{% url 'receipt' vehicle.id %}" class="btn btn-sm btn-info">
+        🧾 Receipt
+    </a>
+
+    <!-- Sign Out -->
+    <a href="{% url 'signout' vehicle.id %}" class="btn btn-sm btn-danger">
+        🚪 Sign Out
+    </a>
+</td>
                 </td>
             </tr>
             {% empty %}

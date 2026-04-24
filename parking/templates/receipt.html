@@ -1,0 +1,16 @@
+{% block title %}
+receipt
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+
+<h3>Receipt</h3>
+<p>Receipt No: {{ payment.receipt_number }}</p>
+<p>Vehicle: {{ payment.vehicle.number_plate }}</p>
+<p>Amount: UGX {{ payment.amount }}</p>
+<p>Date: {{ payment.created_at }}</p>
+
+</div>
+{% endblock %}

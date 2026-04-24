@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-
+battery
 {% endblock %}
 
 {%  block content %}
 
-
 <div class="container">
-    <h3>Tyre Service</h3>
-<form method="POST">
+    <h3>Battery Service</h3>
+<form method="POST" novalidate>
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn btn-primary">Save</button>
