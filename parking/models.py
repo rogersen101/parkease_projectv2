@@ -21,8 +21,7 @@ class Vehicle(models.Model):
         status = models.CharField(max_length=20, default='parked')
 
         def __str__(self):
-                return self.number_plate
-        
+                return self.number_plate    
        
 
 
@@ -41,6 +40,7 @@ class Payment(models.Model):
         return self.receipt_number
     
 class SignOut(models.Model):
+    
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     receiver_name = models.CharField(max_length=100)
     receipt_number = models.CharField(max_length=20)
@@ -51,5 +51,6 @@ class SignOut(models.Model):
 
     def __str__(self):
         return self.vehicle.number_plate
+    
 
 

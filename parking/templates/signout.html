@@ -1,19 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
-{% block title %}
-signout
-{% endblock %}
-signout
+{% block title %} signout {% endblock %} 
+
 {% block content %}
+
 <div class="container">
-<h3>Sign Out Vehicle</h3>
+  <h3>Sign Out Vehicle</h3>
 
-<p>Vehicle: {{ vehicle.number_plate }}</p>
+  <p>Vehicle: {{ vehicle.number_plate }}</p>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
+  <form method="POST">
+    {% csrf_token %} {{ form.as_p }}
     <button>Sign Out</button>
-</form>
+  </form>
 </div>
 {% endblock %}

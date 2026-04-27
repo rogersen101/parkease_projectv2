@@ -20,7 +20,7 @@ def login(request):
 
     return render(request,'login.html', {'form': form})
 
-def register(request):
+def staff_register(request):
     if request.method == 'POST':
         form = StaffForm(request.POST)
         if form.is_valid():

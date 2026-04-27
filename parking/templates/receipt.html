@@ -1,16 +1,84 @@
+{% extends 'base.html' %}
+
 {% block title %}
-receipt
+Receipt
 {% endblock %}
 
 {% block content %}
-<div class="container">
 
+<div class="container mt-4">
 
-<h3>Receipt</h3>
-<p>Receipt No: {{ payment.receipt_number }}</p>
-<p>Vehicle: {{ payment.vehicle.number_plate }}</p>
-<p>Amount: UGX {{ payment.amount }}</p>
-<p>Date: {{ payment.created_at }}</p>
+    <!-- RECEIPT CARD -->
+    <div class="card shadow p-4 mx-auto" id="receipt" style="max-width: 400px;">
+
+        <div class="text-center mb-3">
+            <h4>🚗 ParkEase</h4>
+            <p class="mb-0">Parking Receipt</p>
+            <hr>
+        </div>
+
+        <p><strong>Receipt No:</strong> {{ payment.receipt_number }}</p>
+        <p><strong>Vehicle:</strong> {{ payment.vehicle.number_plate }}</p>
+        <p><strong>Amount:</strong> UGX {{ payment.amount|floatformat:0 }}</p>
+        <p><strong>Date:</strong> {{ payment.created_at }}</p>
+
+        <hr>
+
+        <div class="text-center">
+            <p><small>Thank you for using ParkEase</small></p>
+        </div>
+
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="text-center mt-4">
+
+        <!-- PRINT -->
+        <button onclick="printReceipt()" class="btn btn-primary me-2">
+            🖨️ Print
+        </button>
+
+        <!-- SIGN OUT -->
+        <a href="{% url 'signout' payment.vehicle.id %}" class="btn btn-danger">
+            🚪 Confirm & Sign Out
+        </a>
+
+    </div>
 
 </div>
+
+<!-- PRINT SCRIPT -->
+<script>
+function printReceipt() {
+    var content = document.getElementById("receipt").innerHTML;
+    var win = window.open('', '', 'height=600,width=800');
+    win.document.write('<html><head><title>Receipt</title>');
+    win.document.write('</head><body>');
+    win.document.write(content);
+    win.document.write('</body></html>');
+    win.document.close();
+    win.print();
+}
+</script>
+
+<!-- PRINT STYLING -->
+<style>
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #receipt, #receipt * {
+        visibility: visible;
+    }
+
+    #receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
+</style>
+
 {% endblock %}

@@ -1,52 +1,64 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+
+{% block content %}
 
 <div class="d-flex">
   <!-- SIDEBAR -->
-  <div class="bg-dark text-white p-3" style="width: 220px; height: 100vh">
-    <h4 class="text-center">ParkEase</h4>
-    <hr />
+  <div
+    class="bg-light text-dark p-3 d-flex flex-column"
+    style="width: 220px; height: 100vh" >
+    <div>
+      <h4 class="text-center">ParkEase</h4>
+      <hr />
 
-    <a href="{% url 'register' %}" class="d-block text-white mb-2"
-      >➕ Register Vehicle</a
-    >
-    <a href="{% url 'vehicle_list' %}" class="d-block text-white mb-2"
-      >View Vehicles</a
-    >
-    <a href="#" class="d-block text-white mb-2">Reports</a>
-    <a href="#" class="d-block text-white">SignOut</a>
+      <a href="{% url 'register' %}" class="d-block text-dark mb-2">
+        ➕ Register Vehicle
+      </a>  
+      </a>
+    </div>
+
+    <!-- user profile -->
+    <div class="mt-auto">
+      <hr />
+
+      <div class="text-center">
+        <div class="mb-2">
+          <i class="fa fa-user-circle fa-2x"></i>
+        </div>
+
+        <strong>{{ request.user.username }}</strong><br />
+        <strong>{{ request.user.role}}</strong> <br>
+        
+      </div>
+    </div>
   </div>
 
-  <!-- MAIN CONTENT -->
   <div class="p-4 w-100">
     <h2 class="text-center mb-4">Dashboard</h2>
 
     <!-- CARDS -->
-    <div class="row text-center">
-      <div class="col-md-3">
-        <div class="card bg-primary text-white p-3">
-          Parking Revenue<br />UGX {{ parking_revenue }}
+    <div class="row text-center mb-4">
+      <div class="col-md-4">
+        <div class="card shadow bg-light text-dark p-3">
+          <h5>Total Vehicles</h5>
+          <h3>{{ vehicles.count }}</h3>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="card bg-success text-white p-3">
-          Tyre Revenue<br />UGX {{ tyre_revenue }}
+      <div class="col-md-4">
+        <div class="card shadow bg-light text-dark p-3">
+          <h5>Today's Revenue</h5>
+          <h3>UGX {{ today_revenue|floatformat:0 }}</h3>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="card bg-warning text-dark p-3">
-          Battery Revenue<br />UGX {{ battery_revenue }}
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card bg-dark text-white p-3">
-          Total Revenue<br />UGX {{ total_revenue }}
+      <div class="col-md-4">
+        <div class="card shadow bg-light text-dark p-3">
+          <h5>Available Slots</h5>
+          <h3>{{ available_slots }}</h3>
         </div>
       </div>
     </div>
-    <br>
 
     <!-- SEARCH -->
     <form method="GET" class="mb-3">
@@ -60,14 +72,14 @@
           />
         </div>
         <div class="col-md-2">
-          <button class="btn btn-primary w-100">Search</button>
+          <button class="btn btn-info text-dark w-100">Search</button>
         </div>
       </div>
     </form>
 
     <!-- VEHICLE TABLE -->
     <div class="card shadow">
-      <div class="card-header bg-primary text-white">Vehicle List</div>
+      <div class="card-header bg-light text-dark">🚗 Vehicle List</div>
 
       <div class="card-body">
         <table class="table table-bordered table-striped">
@@ -90,26 +102,36 @@
               <td>{{ vehicle.vehicle_type }}</td>
               <td>{{ vehicle.arrival_time }}</td>
               <td>
-                <span class="badge bg-success">{{ vehicle.status }}</span>
+                <span
+                  class="badge bg-{% if vehicle.status == 'parked' %}success{% else %}secondary{% endif %}"
+                >
+                  {{ vehicle.status }}
+                </span>
               </td>
+
               <td>
-                <!-- Receipt -->
+                {% if vehicle.status == 'parked' %}
+
                 <a
                   href="{% url 'receipt' vehicle.id %}"
                   class="btn btn-sm btn-info"
                 >
-                  Receipt
+                  🧾 Receipt
                 </a>
 
-                <!-- Sign Out -->
                 <a
                   href="{% url 'signout' vehicle.id %}"
                   class="btn btn-sm btn-danger"
                 >
-                  Sign Out
+                  🚪 Sign Out
                 </a>
+
+                {% else %}
+                <span class="badge bg-success">Cleared</span>
+                {% endif %}
               </td>
             </tr>
+
             {% empty %}
             <tr>
               <td colspan="6" class="text-center text-danger">
@@ -122,10 +144,8 @@
       </div>
     </div>
 
-    <!-- FOOTER -->
-    <div class="text-center mt-4">
-      <p class="text-muted">© 2026 ParkEase System</p>
-    </div>
+    
+    
   </div>
 </div>
 

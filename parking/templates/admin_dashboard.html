@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h3>📊 Admin Revenue Dashboard</h3>
+
+    <a href="{% url 'staff_register' %}" class="btn btn-light">
+        ➕ Register Staff
+    </a>
+
+</div>
+
+<!-- DATE FILTER -->
+<form method="GET" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="date" name="date" class="form-control">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-light">Filter</button>
+        </div>
+    </div>
+</form>
+
+<!-- CARDS -->
+<div class="row text-center mb-4">
+
+    <div class="col-md-3">
+        <div class="card bg-light text-dark p-3">
+            Parking<br>UGX {{ parking_revenue|floatformat:0 }}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-light text-dark p-3">
+            Tyre<br>UGX {{ tyre_revenue|floatformat:0 }}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-light text-dark p-3">
+            Battery<br>UGX {{ battery_revenue|floatformat:0 }}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-light text-dark p-3">
+            Total<br>UGX {{ total_revenue|floatformat:0 }}
+        </div>
+    </div>
+
+</div>
+
+
+
+<hr>
+
+<!-- SIGNED-OUT VEHICLES TABLE -->
+<h4>Signed-Out Vehicles</h4>
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+    <th>Vehicle</th>
+    <th>Receiver</th>
+    <th>Phone</th>
+    <th>Receipt</th>
+    <th>Date</th>
+</tr>
+</thead>
+
+<tbody>
+{% for s in signouts %}
+<tr>
+    <td>{{ s.vehicle.number_plate }}</td>
+    <td>{{ s.receiver_name }}</td>
+    <td>{{ s.phone }}</td>
+    <td>{{ s.receipt_number }}</td>
+    <td>{{ s.signout_time }}</td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
