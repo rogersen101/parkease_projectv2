@@ -25,8 +25,8 @@ def dashboard(request):
         created_at__date=today
     ).aggregate(total=Sum('amount'))['total'] or 0
 
-    # Example: total slots = 50
-    total_slots = 50
+    # total slots 
+    total_slots = 150
     occupied = Vehicle.objects.filter(status='parked').count()
     available_slots = total_slots - occupied
 
@@ -41,7 +41,7 @@ def register(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect('vehicle_list')
+            return redirect('dashboard')
 
     return render(request, 'register.html', {'form': form})
 
@@ -116,6 +116,30 @@ def admin_dashboard(request):
         'battery_revenue': battery_revenue,
         'total_revenue': total_revenue,
         'signouts': signouts
+    })
+#edit vehicle view
+def edit_vehicle(request, id):
+    vehicle = get_object_or_404(Vehicle, id=id)
+
+    form = VehicleForm(request.POST or None, instance=vehicle)
+
+    if form.is_valid():
+        form.save()
+        return redirect('vehicle_list')
+
+    return render(request, 'edit_vehicle.html', {
+        'form': form
+    })
+
+def delete_vehicle(request, id):
+    vehicle = get_object_or_404(Vehicle, id=id)
+
+    if request.method == 'POST':
+        vehicle.delete()
+        return redirect('vehicle_list')
+
+    return render(request, 'delete_vehicle.html', {
+        'vehicle': vehicle
     })
 
 
